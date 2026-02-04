@@ -1,73 +1,46 @@
-# React + TypeScript + Vite
+# Tutor
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Tutor is an all-in-one professional platform designed to empower educators. It serves as both a personal branding tool and a comprehensive management suite, allowing tutors to build their online presence while streamlining their daily operations.
 
-Currently, two official plugins are available:
+## Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* Personal Branding: Customizable professional profiles for tutors to showcase expertise.
+* Student Management: Integrated tools for tracking student progress and enrollment.
+* AI-Powered Assessments: Automated quiz generation using advanced AI models.
+* Content Management: Structured systems for managing lecture notes and study materials.
+* Scheduling and Booking: Integrated calendar for managing private and group sessions.
+* Analytics Dashboard: Data-driven insights into student performance and business growth.
 
-## React Compiler
+## Architecture and Standards
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This project is built using professional-grade standards to ensure scalability for the open-source community:
 
-## Expanding the ESLint configuration
+* Architecture: Feature-Sliced Design (FSD)
+* Framework: React 19 + Vite 6
+* Language: TypeScript (Strict)
+* Styling: Tailwind CSS v4
+* UI Components: shadcn/ui
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. Clone the repository:
+   git clone https://github.com/organization/tutor.git
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+2. Install dependencies:
+   npm install
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+3. Run the development server:
+   npm run dev
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Contribution and Hexnity
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+This project is open-source and integrated with Hexnity for contributor recognition. All contributors must link their work to a specific Task ID.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+For detailed instructions on architectural layers, code standards, and Task ID requirements, please refer to the CONTRIBUTING.md file.
+
+### Pull Request Title Policy
+The title of your Pull Request must be exactly the Task ID.
+
+## License
+
+This project is licensed under the MIT License.
