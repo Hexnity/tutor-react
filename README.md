@@ -1,4 +1,4 @@
-# Tutor
+# Tutor 
 
 Tutor is an all-in-one professional platform designed to empower educators. It serves as both a personal branding tool and a comprehensive management suite, allowing tutors to build their online presence while streamlining their daily operations.
 
