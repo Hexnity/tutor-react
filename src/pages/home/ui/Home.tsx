@@ -1,24 +1,24 @@
 import { Link } from "react-router-dom";
-import { 
-  MapPin, 
-  BookOpen, 
-  Calendar, 
-  Users, 
-  Clock, 
-  ArrowUpRight 
+import {
+  MapPin,
+  BookOpen,
+  Calendar,
+  Users,
+  Clock,
+  ArrowUpRight
 } from "lucide-react";
 import { Button } from "@/shared/ui/button";
 import { Badge } from "@/shared/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/shared/ui/card";
 
 interface HomeProps {
-  title?: string; 
+  title?: string;
 }
 
 export const Home = ({ title }: HomeProps) => {
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 space-y-24">
-      
+
       {/* --- Hero: The Individual Expert --- */}
       <section className="grid lg:grid-cols-2 gap-12 items-center pt-10">
         <div className="space-y-6">
@@ -29,8 +29,8 @@ export const Home = ({ title }: HomeProps) => {
             Advanced Sciences & Mathematics with <span className="text-blue-600">John Doe</span>
           </h1>
           <p className="text-lg text-slate-500 leading-relaxed">
-            Professional private instruction for high-achieving students. 
-            Structured lessons, comprehensive resources, and localized 
+            Professional private instruction for high-achieving students.
+            Structured lessons, comprehensive resources, and localized
             learning centers designed for academic excellence. c
           </p>
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
@@ -43,12 +43,12 @@ export const Home = ({ title }: HomeProps) => {
           </div>
         </div>
         <div className="hidden lg:block relative">
-           <div className="aspect-[4/5] bg-slate-100 rounded-[2rem] overflow-hidden border-8 border-white shadow-2xl">
-              {/* Profile Image Placeholder */}
-              <div className="w-full h-full flex items-center justify-center bg-slate-50">
-                <Users className="w-24 h-24 text-slate-200" />
-              </div>
-           </div>
+          <div className="aspect-[4/5] bg-slate-100 rounded-[2rem] overflow-hidden border-8 border-white shadow-2xl">
+            {/* Profile Image Placeholder */}
+            <div className="w-full h-full flex items-center justify-center bg-slate-50">
+              <Users className="w-24 h-24 text-slate-200" />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -59,19 +59,19 @@ export const Home = ({ title }: HomeProps) => {
           <p className="text-slate-500">Comprehensive syllabus coverage for competitive examinations.</p>
         </div>
         <div className="grid md:grid-cols-3 gap-6">
-          <SubjectCard 
-            title="Pure Mathematics" 
-            desc="Calculus, Algebra, and Geometry focus for senior levels." 
+          <SubjectCard
+            title="Pure Mathematics"
+            desc="Calculus, Algebra, and Geometry focus for senior levels."
             count="12 Modules"
           />
-          <SubjectCard 
-            title="Applied Physics" 
-            desc="Mechanics, Thermodynamics, and Modern Physics theory." 
+          <SubjectCard
+            title="Applied Physics"
+            desc="Mechanics, Thermodynamics, and Modern Physics theory."
             count="10 Modules"
           />
-          <SubjectCard 
-            title="Statistics" 
-            desc="Data analysis and probability for specialized streams." 
+          <SubjectCard
+            title="Statistics"
+            desc="Data analysis and probability for specialized streams."
             count="8 Modules"
           />
         </div>

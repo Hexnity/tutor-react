@@ -1,7 +1,7 @@
-import { 
-  Users, 
-  BookOpen, 
-  MapPin, 
+import {
+  Users,
+  BookOpen,
+  MapPin,
   TrendingUp,
   Calendar as CalendarIcon
 } from "lucide-react";
@@ -37,26 +37,26 @@ export const Dashboard = ({ title }: DashboardProps) => {
           </CardHeader>
           <CardContent>
             <div className="space-y-6">
-              <SessionRow 
-                subject="Pure Mathematics" 
-                location="Central Hub" 
-                time="16:00 - 18:00" 
-                students={42} 
-                status="Ready" 
+              <SessionRow
+                subject="Pure Mathematics"
+                location="Central Hub"
+                time="16:00 - 18:00"
+                students={42}
+                status="Ready"
               />
-              <SessionRow 
-                subject="Applied Physics" 
-                location="North Plaza" 
-                time="18:30 - 20:30" 
-                students={28} 
-                status="Exam Prep" 
+              <SessionRow
+                subject="Applied Physics"
+                location="North Plaza"
+                time="18:30 - 20:30"
+                students={28}
+                status="Exam Prep"
               />
-              <SessionRow 
-                subject="Statistics" 
-                location="West Side" 
-                time="Tomorrow, 09:00" 
-                students={35} 
-                status="Pending" 
+              <SessionRow
+                subject="Statistics"
+                location="West Side"
+                time="Tomorrow, 09:00"
+                students={35}
+                status="Pending"
               />
             </div>
           </CardContent>
@@ -117,9 +117,9 @@ const HubProgress = ({ label, value }: any) => (
       <span>{value}% Capacity</span>
     </div>
     <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
-      <div 
-        className="h-full bg-blue-600 transition-all duration-500" 
-        style={{ width: `${value}%` }} 
+      <div
+        className="h-full bg-blue-600 transition-all duration-500"
+        style={{ width: `${value}%` }}
       />
     </div>
   </div>
