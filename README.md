@@ -15,11 +15,11 @@ Tutor is an all-in-one professional platform designed to empower educators. It s
 
 This project is built using professional-grade standards to ensure scalability for the open-source community:
 
-* Architecture: Feature-Sliced Design (FSD)
-* Framework: React 19 + Vite 6
-* Language: TypeScript (Strict)
-* Styling: Tailwind CSS v4
-* UI Components: shadcn/ui
+* Architecture : Feature-Sliced Design (FSD)
+* Framework : React 19 + Vite 6
+* Language : TypeScript (Strict)
+* Styling : Tailwind CSS v4
+* UI Components : shadcn/ui
 
 ## Getting Started
 
