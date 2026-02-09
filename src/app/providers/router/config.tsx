@@ -6,6 +6,7 @@ import { MainLayout } from "@/shared/layouts/MainLayout";
 import { HomePage } from "@/pages/home";
 import { DashboardPage } from "@/pages/admin/dashboard";
 import { RegisterPage } from "@/pages/register";
+import { LoginPage } from "@/pages/login";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
       {
         path: "register",
         element: <RegisterPage />,
+      },
+      {
+        path: "login",
+        element: <LoginPage />,
       },
       // Future routes like /profile or /about go here
     ],

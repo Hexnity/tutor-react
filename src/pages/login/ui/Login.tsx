@@ -7,36 +7,31 @@ import { Badge } from "@/shared/ui/badge";
 
 
 
-export const Register = () => {
+export const Login = () => {
     return (
         <div className="max-w-6xl mx-auto px-6 py-12 space-y-5">
-            {/* Register Section */}
+            {/* Login Section */}
             <section className="grid lg:grid-cols-2 gap-12 items-center pt-10">
                 {/* Left Column */}
                 <div className="space-y-6 text-center lg:text-left order-last lg:order-first">
                     <Badge variant="outline" className="text-blue-600 border-blue-200 bg-blue-50/50">
-                        Student Portal
+                        Welcome Back
                     </Badge>
                     <h1 className="text-5xl font-bold tracking-tight text-slate-900 leading-[1.1]">
-                        Join <span className="text-blue-600">John Doe's</span> Exclusive Learning Community
+                        Continue Your <span className="text-blue-600">Learning Journey</span>
                     </h1>
                     <p className="text-lg text-slate-500 leading-relaxed">
-                        Create your student account to access premium course materials,
-                        track your progress, and schedule one-on-one sessions.
+                        Log in to access your dashboard, view upcoming sessions, and explore new course materials.
                     </p>
                 </div>
 
-                {/* Right Column: Register Form */}
+                {/* Right Column: Login Form */}
                 <div className="w-full max-w-md mx-auto">
                     <Card className="border-slate-100 shadow-2xl shadow-blue-100/50">
                         <CardHeader>
-                            <CardTitle className="text-2xl">Create Account</CardTitle>
+                            <CardTitle className="text-2xl">Student Login</CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-4">
-                            <div className="space-y-2">
-                                <Label htmlFor="name">Full Name</Label>
-                                <Input id="name" placeholder="John Doe" />
-                            </div>
                             <div className="space-y-2">
                                 <Label htmlFor="email">Email Address</Label>
                                 <Input id="email" type="email" placeholder="student@example.com" />
@@ -45,17 +40,13 @@ export const Register = () => {
                                 <Label htmlFor="password">Password</Label>
                                 <Input id="password" type="password" />
                             </div>
-                            <div className="space-y-2">
-                                <Label htmlFor="confirm-password">Confirm Password</Label>
-                                <Input id="confirm-password" type="password" />
-                            </div>
                             <Button size="lg" className="w-full rounded-full shadow-lg shadow-blue-200 mt-2">
-                                Create Account
+                                Login
                             </Button>
                             <div className="mt-4 text-center text-sm text-slate-500">
-                                Already have an account?{" "}
-                                <a href="/login" className="font-medium text-blue-600 hover:text-blue-500 hover:underline transition-colors">
-                                    Login
+                                Don't have an account?{" "}
+                                <a href="/register" className="font-medium text-blue-600 hover:text-blue-500 hover:underline transition-colors">
+                                    Register
                                 </a>
                             </div>
                         </CardContent>
