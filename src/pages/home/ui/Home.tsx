@@ -1,149 +1,127 @@
-import { Link } from "react-router-dom";
-import {
-  MapPin,
-  BookOpen,
-  Calendar,
-  Users,
-  Clock,
-  ArrowUpRight
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { 
+  Users, 
+  Zap, 
+  Layout, 
+  QrCode,
+  Server,
+  Cloud,
+  Layers,
+  BarChart3,
+  Sparkles,
+  Gamepad2,
+  ShieldCheck,
 } from "lucide-react";
-import { Button } from "@/shared/ui/button";
-import { Badge } from "@/shared/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/shared/ui/card";
 
-interface HomeProps {
-  title?: string;
-}
+export const Home = () => {
+  const [isManaged, setIsManaged] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
 
-export const Home = ({ title }: HomeProps) => {
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: "Solutions", href: "#" },
+    { name: "Open Source", href: "#" },
+    { name: "AI Engine", href: "#" },
+    { name: "Pricing", href: "#" },
+  ];
+
   return (
-    <div className="max-w-6xl mx-auto px-6 py-12 space-y-24">
-
-      {/* --- Hero: The Individual Expert --- */}
-      <section className="grid lg:grid-cols-2 gap-12 items-center pt-10">
-        <div className="space-y-6">
-          <Badge variant="outline" className="text-blue-600 border-blue-200 bg-blue-50/50">
-            Enrolling for 2026 Academic Year {title}
-          </Badge>
-          <h1 className="text-5xl font-bold tracking-tight text-slate-900 leading-[1.1]">
-            Advanced Sciences & Mathematics with <span className="text-blue-600">John Doe</span>
-          </h1>
-          <p className="text-lg text-slate-500 leading-relaxed">
-            Professional private instruction for high-achieving students.
-            Structured lessons, comprehensive resources, and localized
-            learning centers designed for academic excellence. c
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <Button size="lg" className="rounded-full shadow-lg shadow-blue-200" asChild>
-              <Link to="/admin">Student Dashboard</Link>
-            </Button>
-            <Button variant="outline" size="lg" className="rounded-full" asChild>
-              <a href="#schedule">View Schedule</a>
-            </Button>
-          </div>
-        </div>
-        <div className="hidden lg:block relative">
-          <div className="aspect-[4/5] bg-slate-100 rounded-[2rem] overflow-hidden border-8 border-white shadow-2xl">
-            {/* Profile Image Placeholder */}
-            <div className="w-full h-full flex items-center justify-center bg-slate-50">
-              <Users className="w-24 h-24 text-slate-200" />
+    <div className="min-h-screen bg-[#0b0f1a] text-slate-300 font-sans selection:bg-cyan-500/30 overflow-x-hidden">
+      {/* Dynamic Background Glows */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-cyan-900/10 blur-[120px] rounded-full" />
+        <div className="absolute bottom-[10%] right-[-5%] w-[40%] h-[40%] bg-blue-900/10 blur-[120px] rounded-full" />
+      </div>
+      
+      {/* HERO */}
+      <section className="relative pt-44 pb-20 px-6 z-10">
+        <div className="max-w-6xl mx-auto text-center">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/20 bg-cyan-500/5 text-cyan-400 text-[10px] font-bold tracking-[0.2em] uppercase mb-8">
+              <Sparkles size={14} /> Intelligence for Education
             </div>
-          </div>
+            <h1 className="text-4xl md:text-8xl font-light tracking-tight text-white mb-8 leading-tight">
+              Teach with <span className="font-extralight italic text-slate-500">Precision.</span><br />Engage with AI.
+            </h1>
+            <p className="text-slate-400 text-sm md:text-lg font-light max-w-2xl mx-auto mb-12">
+              The only open-source ecosystem for Sri Lankan tutors. Build your brand, engage students with AI quizzes, and manage attendance in one place.
+            </p>
+
+            <div className="flex flex-col items-center gap-6 mb-20">
+              <div className="bg-slate-900/80 backdrop-blur-md p-1.5 rounded-full border border-white/10 flex items-center shadow-2xl">
+                <button onClick={() => setIsManaged(false)} className={`px-6 py-2.5 rounded-full text-[10px] font-bold tracking-widest transition-all ${!isManaged ? 'bg-white text-slate-950' : 'text-slate-500'}`}>SELF HOSTED</button>
+                <button onClick={() => setIsManaged(true)} className={`px-6 py-2.5 rounded-full text-[10px] font-bold tracking-widest transition-all ${isManaged ? 'bg-white text-slate-950' : 'text-slate-500'}`}>MANAGED CLOUD</button>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* DASHBOARD MOCKUP - REINSTATED */}
+          <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} className="relative max-w-5xl mx-auto group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-3xl blur opacity-10" />
+            <div className="relative bg-[#111827]/90 backdrop-blur-2xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row h-[550px]">
+              <div className="w-64 border-r border-white/5 p-6 hidden md:flex flex-col gap-8">
+                <div className="space-y-6">
+                  <div className="text-[10px] font-semibold text-slate-600 tracking-[0.2em] uppercase">Management</div>
+                  {[Layout, Users, BarChart3, QrCode].map((Icon, i) => (
+                    <div key={i} className={`flex items-center gap-4 ${i === 0 ? 'text-cyan-400' : 'text-slate-500'}`}><Icon size={18} /><div className="h-1.5 w-16 bg-current opacity-20 rounded-full" /></div>
+                  ))}
+                </div>
+                <div className="mt-auto bg-cyan-500/5 border border-cyan-500/10 rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-2"><div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" /><div className="text-[9px] text-cyan-400 font-bold uppercase">AI Processing</div></div>
+                  <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden"><motion.div animate={{ x: ["-100%", "100%"] }} transition={{ repeat: Infinity, duration: 2 }} className="w-1/2 h-full bg-cyan-400" /></div>
+                </div>
+              </div>
+
+              <div className="flex-1 p-10 text-left overflow-y-auto">
+                <div className="flex justify-between items-start mb-12">
+                  <div><h2 className="text-2xl font-light text-white mb-1">Classroom Insights</h2><p className="text-xs text-slate-500">Real-time engagement across active batches.</p></div>
+                  <div className="flex gap-2"><div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center"><Cloud size={16}/></div></div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="bg-white/5 border border-white/5 rounded-2xl p-6">
+                    <div className="flex justify-between items-center mb-6"><Gamepad2 size={20} className="text-purple-400" /><span className="text-[10px] text-purple-400 border border-purple-400/30 px-2 py-0.5 rounded-full uppercase">Code: 882 109</span></div>
+                    <p className="text-sm font-light text-slate-300 mb-4">Physics: Quantum Quiz</p>
+                    <div className="space-y-3">
+                      {[72, 45, 12].map((val, i) => (
+                        <div key={i} className="space-y-1"><div className="flex justify-between text-[9px] text-slate-500 uppercase"><span>Option {String.fromCharCode(65 + i)}</span><span>{val}%</span></div><div className="h-1 w-full bg-white/5 rounded-full"><motion.div initial={{ width: 0 }} whileInView={{ width: `${val}%` }} className="h-full bg-slate-400" /></div></div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="bg-white/5 border border-white/5 rounded-2xl p-6 flex flex-col justify-between">
+                    <div className="flex items-center gap-3"><Layers className="text-cyan-400" size={20}/><span className="text-xs font-light uppercase tracking-widest">Smart-Log</span></div>
+                    <div><div className="text-3xl font-light text-white mb-1">94.2%</div><p className="text-[10px] text-slate-500 uppercase">Weekly Attendance</p></div>
+                    <button className="w-full py-2 bg-white text-slate-900 text-[10px] font-bold uppercase rounded-lg">Export</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* --- Subject Tracks --- */}
-      <section className="space-y-8">
-        <div className="flex flex-col gap-2">
-          <h2 className="text-3xl font-bold tracking-tight">Available Subjects</h2>
-          <p className="text-slate-500">Comprehensive syllabus coverage for competitive examinations.</p>
-        </div>
-        <div className="grid md:grid-cols-3 gap-6">
-          <SubjectCard
-            title="Pure Mathematics"
-            desc="Calculus, Algebra, and Geometry focus for senior levels."
-            count="12 Modules"
-          />
-          <SubjectCard
-            title="Applied Physics"
-            desc="Mechanics, Thermodynamics, and Modern Physics theory."
-            count="10 Modules"
-          />
-          <SubjectCard
-            title="Statistics"
-            desc="Data analysis and probability for specialized streams."
-            count="8 Modules"
-          />
-        </div>
+      {/* FEATURES GRID - REINSTATED */}
+      <section className="py-32 max-w-7xl mx-auto px-8 grid md:grid-cols-4 gap-12">
+        {[
+          { icon: Layout, title: "Web Builder", desc: "Choose from 50+ pre-built sections designed for Sri Lankan tutors." },
+          { icon: Zap, title: "AI Quiz Master", desc: "Upload your PDFs and let AI draft localized quizzes and summaries." },
+          { icon: ShieldCheck, title: "Privacy First", desc: "Own your data. Fully compliant with student privacy standards." },
+          { icon: Server, title: "Edge Hosting", desc: "Localized servers in Colombo for lightning-fast dashboard access." }
+        ].map((item, i) => (
+          <motion.div key={i} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="space-y-4">
+            <item.icon className="text-cyan-500 mb-4" size={24} strokeWidth={1} />
+            <h3 className="text-sm font-medium tracking-widest text-white uppercase">{item.title}</h3>
+            <p className="text-xs font-light leading-relaxed text-slate-500">{item.desc}</p>
+          </motion.div>
+        ))}
       </section>
-
-      {/* --- Location & Schedule (The Marketing Focus) --- */}
-      <section id="schedule" className="bg-slate-900 rounded-[2.5rem] p-8 md:p-16 text-white overflow-hidden relative">
-        <div className="relative z-10 space-y-10">
-          <div className="max-w-2xl space-y-4">
-            <h2 className="text-3xl font-bold italic">Session Schedule</h2>
-            <p className="text-slate-400">Find the most convenient location for your weekly physical or hybrid sessions.</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-4">
-            <LocationRow day="Monday & Wednesday" time="4:00 PM - 7:00 PM" location="Central Avenue Hub" />
-            <LocationRow day="Tuesday & Thursday" time="3:30 PM - 6:30 PM" location="North Plaza Center" />
-            <LocationRow day="Friday" time="5:00 PM - 8:00 PM" location="West Side Institute" />
-            <LocationRow day="Saturday" time="8:00 AM - 12:00 PM" location="Downtown Library Wing" />
-          </div>
-        </div>
-        {/* Background Accent */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/20 blur-[100px] rounded-full -mr-20 -mt-20" />
-      </section>
-
-      {/* --- Simple Footer --- */}
-      <footer className="pt-20 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-400 text-sm">
-        <p>© 2026 John Doe Education. All rights reserved.</p>
-        <div className="flex gap-8">
-          <a href="#" className="hover:text-blue-600 transition-colors">Resources</a>
-          <a href="#" className="hover:text-blue-600 transition-colors">Privacy</a>
-          <a href="#" className="hover:text-blue-600 transition-colors">Contact</a>
-        </div>
-      </footer>
     </div>
   );
 };
 
-// --- Local Components ---
 
-const SubjectCard = ({ title, desc, count }: any) => (
-  <Card className="border-slate-100 shadow-none hover:border-blue-200 transition-all group cursor-default">
-    <CardHeader>
-      <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 mb-2">
-        <BookOpen className="w-5 h-5" />
-      </div>
-      <CardTitle className="text-xl">{title}</CardTitle>
-    </CardHeader>
-    <CardContent>
-      <p className="text-sm text-slate-500 leading-relaxed">{desc}</p>
-    </CardContent>
-    <CardFooter className="flex items-center justify-between border-t border-slate-50 pt-4 mt-2">
-      <span className="text-xs font-medium text-slate-400 uppercase tracking-wider">{count}</span>
-      <ArrowUpRight className="w-4 h-4 text-slate-300 group-hover:text-blue-600 transition-colors" />
-    </CardFooter>
-  </Card>
-);
-
-const LocationRow = ({ day, time, location }: any) => (
-  <div className="flex items-center justify-between p-5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
-    <div className="space-y-1">
-      <div className="flex items-center gap-2 text-blue-400">
-        <Calendar className="w-4 h-4" />
-        <span className="text-sm font-medium">{day}</span>
-      </div>
-      <div className="flex items-center gap-2">
-        <MapPin className="w-4 h-4 text-slate-500" />
-        <span className="text-base font-semibold">{location}</span>
-      </div>
-    </div>
-    <div className="flex items-center gap-2 text-slate-400">
-      <Clock className="w-4 h-4" />
-      <span className="text-sm">{time}</span>
-    </div>
-  </div>
-);

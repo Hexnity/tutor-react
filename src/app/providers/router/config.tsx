@@ -16,7 +16,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage title="Home" />,
+        element: <HomePage/>,
       },
       // Future routes like /profile or /about go here
     ],
