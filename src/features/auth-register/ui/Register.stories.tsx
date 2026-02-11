@@ -1,18 +1,17 @@
-// src/pages/register/ui/Register.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within, expect, fn } from '@storybook/test';
-import { Register } from './Register';
+import { RegisterForm } from './RegisterForm';
 
-const meta: Meta<typeof Register> = {
-  title: 'Pages/Register',
-  component: Register,
+const meta: Meta<typeof RegisterForm> = {
+  title: 'Features/Email Auth/Register',
+  component: RegisterForm,
   parameters: {
     layout: 'fullscreen',
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof Register>;
+type Story = StoryObj<typeof RegisterForm>;
 
 export const Default: Story = {};
 

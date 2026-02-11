@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import { LoginForm } from "./LoginForm";
-import { Card, CardContent, CardHeader } from "@/shared/ui/card";
+import { LoginForm } from "@/features/auth-login";
 
 export const Login = () => {
     const handleSuccess = () => {
@@ -50,24 +49,7 @@ export const Login = () => {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="w-full max-w-md mx-auto"
                     >
-                        <Card className="bg-[#111827]/60 backdrop-blur-2xl border-white/10 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] rounded-3xl overflow-hidden">
-                            <CardHeader className="pt-10 pb-6 px-8 text-center">
-                                <p className="text-xs font-light text-slate-500 uppercase tracking-widest mt-2">Enter your credentials to proceed</p>
-                            </CardHeader>
-
-                            <CardContent className="px-8 pb-10">
-                                <LoginForm onSuccess={handleSuccess} />
-
-                                <div className="pt-8 text-center border-t border-white/5 mt-4">
-                                    <p className="text-[11px] font-light text-slate-500 uppercase tracking-widest">
-                                        Don't have an account?{" "}
-                                        <a href="/auth/register" className="font-bold text-white hover:text-cyan-400 transition-colors">
-                                            Register Now
-                                        </a>
-                                    </p>
-                                </div>
-                            </CardContent>
-                        </Card>
+                        <LoginForm onSuccess={handleSuccess} />
                     </motion.div>
                 </section>
             </main>

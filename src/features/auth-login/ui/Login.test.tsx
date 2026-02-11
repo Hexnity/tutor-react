@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { expect, test, describe, vi } from "vitest";
-import { Login } from "./Login";
+import { LoginForm } from "./LoginForm";
 
 // mock global fetch for API call 
 (globalThis as any).fetch = vi.fn();
@@ -9,7 +9,8 @@ import { Login } from "./Login";
 describe("Login Page Integration", () => {
   test("shows error message with invalid email", async () => {
     const user = userEvent.setup();
-    render(<Login />);
+    const handleSuccess = vi.fn();
+    render(<LoginForm onSuccess={handleSuccess}/>);
 
     //find input labels (accessibility first approach)
     const emailInput = screen.getByLabelText(/email/i);
@@ -30,7 +31,8 @@ describe("Login Page Integration", () => {
 
   test("shows error message with short password", async () => {
     const user = userEvent.setup();
-    render(<Login />);
+    const handleSuccess = vi.fn();
+    render(<LoginForm onSuccess={handleSuccess}/>);
 
     const emailInput = screen.getByLabelText(/email/i);
     const passwordInput = screen.getByLabelText(/^password$/i);
@@ -50,9 +52,10 @@ describe("Login Page Integration", () => {
 
   test("submits form successfully with valid data", async () => {
     const user = userEvent.setup();
+    const handleSuccess = vi.fn();
     (fetch as any).mockResolvedValue({ ok: true });
 
-    render(<Login />);
+    render(<LoginForm onSuccess={handleSuccess}/>);
 
     await user.type(screen.getByLabelText(/email/i), 'test@example.com');
     await user.type(screen.getByLabelText(/^password$/i), 'password123');

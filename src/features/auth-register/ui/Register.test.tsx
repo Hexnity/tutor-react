@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { expect, test, describe, vi } from "vitest";
-import { Register } from "./Register";
+import { RegisterForm } from "./RegisterForm";
 
 // mock global fetch for API call 
 global.fetch = vi.fn();
@@ -9,7 +9,8 @@ global.fetch = vi.fn();
 describe("Register Page Integration", () => {
   test("shows error message when passwords do not match", async () => {
     const user = userEvent.setup();
-    render(<Register />);
+    const handleSuccess = vi.fn();
+    render(<RegisterForm onSuccess={handleSuccess} />);
     
     //find input labels (accessibility first approach)
     const nameInput = screen.getByLabelText(/full name/i);
@@ -35,8 +36,8 @@ describe("Register Page Integration", () => {
   test("submits form successfully with valid data", async () => {
     const user = userEvent.setup();
     (fetch as any).mockResolvedValue({ ok: true });
-    
-    render(<Register />);
+    const handleSuccess = vi.fn();
+    render(<RegisterForm onSuccess={handleSuccess} />);
     
     await user.type(screen.getByLabelText(/full name/i), 'John Doe');
     await user.type(screen.getByLabelText(/email/i), 'john@example.com');
@@ -47,5 +48,7 @@ describe("Register Page Integration", () => {
 
     //verify API call
     expect(fetch).toHaveBeenCalledWith('/api/auth/register', expect.any(Object));
+    //verify success callback
+    expect(handleSuccess).toHaveBeenCalled();
   });
 });

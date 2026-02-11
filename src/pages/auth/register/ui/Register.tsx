@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader } from "@/shared/ui/card";
-import { RegisterForm } from "./RegisterForm";
+import { RegisterForm } from "@/features/auth-register";
 
 export const Register = () => {
     const handleSuccess = () => {
@@ -57,25 +56,7 @@ export const Register = () => {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="w-full lg:max-w-xl" // Balanced mid-width
                     >
-                        <Card className="bg-[#111827]/60 backdrop-blur-3xl border-white/10 shadow-2xl rounded-[2rem] overflow-hidden">
-                            <CardHeader className="pt-10 pb-2 px-8 text-center lg:text-left">
-                                <p className="text-[10px] font-bold text-cyan-500 uppercase tracking-[0.4em] mb-1">Registration</p>
-                                <p className="text-[11px] font-light text-slate-500 uppercase tracking-widest leading-relaxed">Initialize your student profile</p>
-                            </CardHeader>
-                            
-                            <CardContent className="px-8 pb-10 pt-6">
-                                <RegisterForm onSuccess={handleSuccess} />
-                                
-                                <div className="mt-8 pt-6 border-t border-white/5 text-center">
-                                    <p className="text-[10px] font-light text-slate-500 uppercase tracking-widest">
-                                        Already have an account?{" "}
-                                        <a href="/auth/login" className="font-bold text-white hover:text-cyan-400 transition-colors">
-                                            Login
-                                        </a>
-                                    </p>
-                                </div>
-                            </CardContent>
-                        </Card>
+                        <RegisterForm onSuccess={handleSuccess} />
                     </motion.div>
                 </section>
             </main>

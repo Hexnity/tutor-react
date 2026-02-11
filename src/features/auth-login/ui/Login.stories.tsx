@@ -1,18 +1,17 @@
-// src/pages/login/ui/Login.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within, expect, fn } from '@storybook/test';
-import { Login } from './Login';
+import { LoginForm } from './LoginForm';
 
-const meta: Meta<typeof Login> = {
-  title: 'Pages/Login',
-  component: Login,
+const meta: Meta<typeof LoginForm> = {
+  title: 'Features/Email Auth/Login',
+  component: LoginForm,
   parameters: {
     layout: 'fullscreen',
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof Login>;
+type Story = StoryObj<typeof LoginForm>;
 
 export const Default: Story = {};
 
