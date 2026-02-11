@@ -1,35 +1,65 @@
-import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { Login } from './Login';
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { expect, test, describe, vi } from "vitest";
+import { Login } from "./Login";
 
+// mock global fetch for API call 
+(globalThis as any).fetch = vi.fn();
 
-describe('Login Page', () => {
+describe("Login Page Integration", () => {
+  test("shows error message with invalid email", async () => {
+    const user = userEvent.setup();
+    render(<Login />);
 
-    it('renders the login form correctly', () => {
-        render(<Login />);
+    //find input labels (accessibility first approach)
+    const emailInput = screen.getByLabelText(/email/i);
+    const passwordInput = screen.getByLabelText(/^password$/i);
+    const submitButton = screen.getByRole('button', { name: /access account/i });
 
-        const heading = screen.getByRole('heading', { level: 1, name: /Continue Your/i });
-        expect(heading).toBeInTheDocument();
+    //simulate user interaction with invalid email
+    await user.type(emailInput, 'invalid-email');
+    await user.type(passwordInput, 'password123');
 
-        expect(screen.getByLabelText(/Email Address/i)).toBeInTheDocument();
-        expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
-        expect(screen.getByRole('button', { name: /Login/i })).toBeInTheDocument();
+    //trigger validation
+    await user.click(submitButton);
 
-        expect(screen.getByRole('link', { name: /Register/i })).toBeInTheDocument();
-    });
+    //verify validation error
+    const error = await screen.findByText(/invalid email address/i);
+    expect(error).toBeInTheDocument();
+  });
 
-    it('allows typing in the email and password fields', async () => {
-        const user = userEvent.setup();
+  test("shows error message with short password", async () => {
+    const user = userEvent.setup();
+    render(<Login />);
 
-        render(<Login />);
-        const emailInput = screen.getByLabelText(/Email Address/i);
-        const passwordInput = screen.getByLabelText(/Password/i);
+    const emailInput = screen.getByLabelText(/email/i);
+    const passwordInput = screen.getByLabelText(/^password$/i);
+    const submitButton = screen.getByRole('button', { name: /access account/i });
 
-        await user.type(emailInput, 'test@example.com');
-        await user.type(passwordInput, 'password123');
+    //simulate user interaction with short password
+    await user.type(emailInput, 'test@example.com');
+    await user.type(passwordInput, '123');
 
-        expect(emailInput).toHaveValue('test@example.com');
-        expect(passwordInput).toHaveValue('password123');
-    });
+    //trigger validation
+    await user.click(submitButton);
+
+    //verify validation error
+    const error = await screen.findByText(/password must be at least 8 characters/i);
+    expect(error).toBeInTheDocument();
+  });
+
+  test("submits form successfully with valid data", async () => {
+    const user = userEvent.setup();
+    (fetch as any).mockResolvedValue({ ok: true });
+
+    render(<Login />);
+
+    await user.type(screen.getByLabelText(/email/i), 'test@example.com');
+    await user.type(screen.getByLabelText(/^password$/i), 'password123');
+
+    await user.click(screen.getByRole('button', { name: /access account/i }));
+
+    //verify API call
+    expect(fetch).toHaveBeenCalledWith('/api/auth/login', expect.any(Object));
+  });
 });
