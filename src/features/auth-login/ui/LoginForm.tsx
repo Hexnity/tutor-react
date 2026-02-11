@@ -16,7 +16,7 @@ export const LoginForm = ({ onSuccess }: { onSuccess: () => void }) => {
 
   const onSubmit = async (data: LoginSchema) => {
     try {
-      const { user, session } = await handleLogin(data);
+      const { user } = await handleLogin(data);
       if (user) {
         onSuccess();
       }

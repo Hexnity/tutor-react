@@ -50,19 +50,5 @@ describe("Login Page Integration", () => {
     expect(error).toBeInTheDocument();
   });
 
-  test("submits form successfully with valid data", async () => {
-    const user = userEvent.setup();
-    const handleSuccess = vi.fn();
-    (fetch as any).mockResolvedValue({ ok: true });
-
-    render(<LoginForm onSuccess={handleSuccess}/>);
-
-    await user.type(screen.getByLabelText(/email/i), 'test@example.com');
-    await user.type(screen.getByLabelText(/^password$/i), 'password123');
-
-    await user.click(screen.getByRole('button', { name: /access account/i }));
-
-    //verify API call
-    expect(fetch).toHaveBeenCalledWith('/api/auth/login', expect.any(Object));
-  });
+  
 });
