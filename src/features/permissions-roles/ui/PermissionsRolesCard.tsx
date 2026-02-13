@@ -2,22 +2,31 @@ import { ListChecks } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { Badge } from "@/shared/ui/badge";
 
-export const PermissionsRolesCard = () => {
-    const roles = [
-        {
-            name: "Administrator",
-            permissions: ["Full Access", "User Management"],
-        },
-        {
-            name: "Data Analyst",
-            permissions: ["View Reports", "Create Dashboards"],
-        },
-        {
-            name: "Support Agent",
-            permissions: ["View User Data", "Reset Passwords"],
-        },
-    ];
+type Role = {
+    name: string;
+    permissions: string[];
+};
 
+type PermissionsRolesCardProps = {
+    roles?: Role[];
+};
+
+const defaultRoles: Role[] = [
+    {
+        name: "Administrator",
+        permissions: ["Full Access", "User Management"],
+    },
+    {
+        name: "Data Analyst",
+        permissions: ["View Reports", "Create Dashboards"],
+    },
+    {
+        name: "Support Agent",
+        permissions: ["View User Data", "Reset Passwords"],
+    },
+];
+
+export const PermissionsRolesCard = ({ roles = defaultRoles }: PermissionsRolesCardProps) => {
     return (
         <Card className="h-full">
             <CardHeader className="border-b pb-4 px-6">
