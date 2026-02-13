@@ -8,7 +8,7 @@ import { DashboardPage } from "@/pages/admin/dashboard";
 import { RegisterPage } from "@/pages/auth/register";
 import { LoginPage } from "@/pages/auth/login";
 import { ProfilePage } from "@/pages/admin/profile";
-import { ThemeProvider } from "@/pages/admin/dashboard/dark-light-toggle";
+import { ThemeProvider } from "@/features/dark-light-toggle";
 
 export const router = createBrowserRouter([
   {
