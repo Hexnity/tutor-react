@@ -10,7 +10,7 @@ import { Button } from "@/shared/ui/button";
 export const UserProfileCard = () => (
     <Card className="overflow-hidden">
         <CardContent className="pt-8 flex flex-col items-center text-center">
-            <Avatar size="lg" className="size-24 mb-4 ring-4 ring-slate-50">
+            <Avatar className="size-24 mb-4 ring-4 ring-slate-50">
                 <AvatarImage src="" alt="profile pic" />
                 <AvatarFallback>AJ</AvatarFallback>
             </Avatar>
