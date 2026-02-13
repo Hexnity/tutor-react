@@ -2,6 +2,7 @@ import { UserProfileCard } from "@/features/user-profileCard";
 import { AccountSettingsCard } from "@/features/account-settings";
 import { RecentActivityCard } from "@/features/recent-activity";
 import { PermissionsRolesCard } from "@/features/permissions-roles";
+import { ToggleButton } from "@/features/dark-light-toggle";
 
 interface ProfileProps {
     title?: string;
@@ -16,7 +17,10 @@ export const Profile = ({ title }: ProfileProps) => {
                     {title || "User Profile"}
                 </h1>
             </div>
-
+            <ToggleButton
+                      showLabel
+                      size="default"
+                    />
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 {/* --- Primary Info (Left Column) --- */}
                 <div className="lg:col-span-4 sticky top-24">

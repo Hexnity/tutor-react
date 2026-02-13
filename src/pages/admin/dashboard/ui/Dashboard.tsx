@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { Badge } from "@/shared/ui/badge";
-import { DarkLightToggle } from '../dark-light-toggle';
+import { ToggleButton } from "@/features/dark-light-toggle";
 
 interface DashboardProps {
   title?: string;
@@ -26,7 +26,7 @@ export const Dashboard = ({ title }: DashboardProps) => {
             Monitor your students, locations, and session performance.
           </p>
         </div>
-        <DarkLightToggle
+        <ToggleButton
           showLabel
           size="default"
         />
