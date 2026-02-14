@@ -1,32 +1,57 @@
-import { ListChecks } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ListChecks, Loader2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { Badge } from "@/shared/ui/badge";
+import { getPermissionsRoles } from "../api/handlers";
+import type { PermissionsRoles } from "../model/types";
 
-type Role = {
-    name: string;
-    permissions: string[];
-};
+export const PermissionsRolesCard = () => {
+    const [roles, setRoles] = useState<PermissionsRoles>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
-type PermissionsRolesCardProps = {
-    roles?: Role[];
-};
+    useEffect(() => {
+        const fetchRoles = async () => {
+            try {
+                setLoading(true);
+                const data = await getPermissionsRoles();
+                setRoles(data);
+            } catch (err) {
+                setError(err instanceof Error ? err.message : 'Failed to load roles');
+            } finally {
+                setLoading(false);
+            }
+        };
 
-const defaultRoles: Role[] = [
-    {
-        name: "Administrator",
-        permissions: ["Full Access", "User Management"],
-    },
-    {
-        name: "Data Analyst",
-        permissions: ["View Reports", "Create Dashboards"],
-    },
-    {
-        name: "Support Agent",
-        permissions: ["View User Data", "Reset Passwords"],
-    },
-];
+        fetchRoles();
+    }, []);
 
-export const PermissionsRolesCard = ({ roles = defaultRoles }: PermissionsRolesCardProps) => {
+    if (loading) {
+        return (
+            <Card className="h-full">
+                <CardHeader className="border-b pb-4 px-6">
+                    <CardTitle className="text-lg font-bold">Permissions & Roles</CardTitle>
+                </CardHeader>
+                <CardContent className="flex items-center justify-center min-h-[200px]">
+                    <Loader2 className="size-8 animate-spin text-blue-600" />
+                </CardContent>
+            </Card>
+        );
+    }
+
+    if (error) {
+        return (
+            <Card className="h-full">
+                <CardHeader className="border-b pb-4 px-6">
+                    <CardTitle className="text-lg font-bold">Permissions & Roles</CardTitle>
+                </CardHeader>
+                <CardContent className="flex items-center justify-center min-h-[200px]">
+                    <p className="text-sm text-red-500">{error}</p>
+                </CardContent>
+            </Card>
+        );
+    }
+
     return (
         <Card className="h-full">
             <CardHeader className="border-b pb-4 px-6">

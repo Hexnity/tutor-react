@@ -1,12 +1,55 @@
+import { useEffect, useState } from "react";
+import { Loader2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
+import { getRecentActivities } from "../api/handlers";
+import type { RecentActivities } from "../model/types";
 
 export const RecentActivityCard = () => {
-    const activities = [
-        { title: "Updated profile information", date: "2024-07-29 10:30 AM" },
-        { title: "Logged in from new device", date: "2024-07-28 09:15 PM" },
-        { title: "Changed password", date: "2024-07-25 02:00 PM" },
-        { title: "Accessed sales report", date: "2024-07-24 11:00 AM" },
-    ];
+    const [activities, setActivities] = useState<RecentActivities>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        const fetchActivities = async () => {
+            try {
+                setLoading(true);
+                const data = await getRecentActivities();
+                setActivities(data);
+            } catch (err) {
+                setError(err instanceof Error ? err.message : 'Failed to load activities');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchActivities();
+    }, []);
+
+    if (loading) {
+        return (
+            <Card className="h-full">
+                <CardHeader className="border-b pb-4 px-6">
+                    <CardTitle className="text-lg font-bold">Recent Activity</CardTitle>
+                </CardHeader>
+                <CardContent className="flex items-center justify-center min-h-[200px]">
+                    <Loader2 className="size-8 animate-spin text-blue-600" />
+                </CardContent>
+            </Card>
+        );
+    }
+
+    if (error) {
+        return (
+            <Card className="h-full">
+                <CardHeader className="border-b pb-4 px-6">
+                    <CardTitle className="text-lg font-bold">Recent Activity</CardTitle>
+                </CardHeader>
+                <CardContent className="flex items-center justify-center min-h-[200px]">
+                    <p className="text-sm text-red-500">{error}</p>
+                </CardContent>
+            </Card>
+        );
+    }
 
     return (
         <Card className="h-full">
