@@ -1,17 +1,16 @@
-import { render, screen,waitFor } from "@testing-library/react";
-import { expect, test, describe,vi } from "vitest";
+import { render, screen, waitFor } from "@testing-library/react";
+import { expect, test, describe, vi } from "vitest";
 import { UserProfileCard } from "./UserProfileCard";
 import * as handlers from "../api/handlers";
 
 const mockProfile = {
     id: "1",
-    name: "Alex Johnson",
-    role: "Senior Admin & Data Analyst",
-    email: "alex.johnson@example.com",
-    phone: "+1 (555) 123-4567",
-    location: "San Francisco, CA",
+    full_name: "Alex Johnson",
+    mobile: "+1 (555) 123-4567",
     bio: "Experienced professional",
-    initials: "AJ",
+    avatar_url: "https://example.com/avatar.png",
+    website: "https://example.com",
+    updated_at: new Date().toISOString(),
 };
 
 describe("UserProfileCard", () => {
@@ -21,11 +20,11 @@ describe("UserProfileCard", () => {
         render(<UserProfileCard />);
 
 
-        
+
         await waitFor(() => {
             expect(screen.getByText(/Alex Johnson/i)).toBeInTheDocument();
-            expect(screen.getByText(/Senior Admin & Data Analyst/i)).toBeInTheDocument();
-            expect(screen.getByText(/alex.johnson@example.com/i)).toBeInTheDocument();
+            expect(screen.getByText(/Experienced professional/i)).toBeInTheDocument();
+            expect(screen.getByText(/\+1 \(555\) 123-4567/i)).toBeInTheDocument();
             expect(screen.getByRole('button', { name: /Edit Profile/i })).toBeInTheDocument();
         });
     });
