@@ -1,12 +1,10 @@
 
 export interface UserProfile {
     id: string;
-    name: string;
-    role: string;
-    email: string;
-    phone: string;
-    location: string;
+    full_name: string;
+    updated_at?: string;
+    mobile: string;
     bio: string;
-    avatarUrl?: string;
-    initials: string;
+    avatar_url?: string;
+    website?: string;
 }

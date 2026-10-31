@@ -1,15 +1,50 @@
+import { supabase } from '@/shared/api/supabase';
 import type { UserProfile } from '../model/types';
 
-export const getUserProfile = async (): Promise<UserProfile> => {
-    return {
-        id: '1',
-        name: 'Alex Johnson',
-        role: 'Senior Admin & Data Analyst',
-        email: 'alex.johnson@example.com',
-        phone: '+1 (555) 123-4567',
-        location: 'New York, USA',
-        bio: 'Passionate about data-driven insights and optimizing operational workflows. I specialize in backend architecture and enjoy contributing to open-source projects in my free time.',
-        avatarUrl: 'https://example.com/avatar-placeholder.png',
-        initials: 'AJ',
-    };
+export const getUserProfile = async (): Promise<UserProfile | null> => {
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) return null;
+
+    const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .single();
+
+    if (error) {
+        if (error.code === 'PGRST116') {
+            return {
+                id: user.id,
+                full_name: user.user_metadata?.full_name || '',
+                bio: '',
+                mobile: '',
+                avatar_url: user.user_metadata?.avatar_url || '',
+                website: '',
+            };
+        }
+        console.error('Error fetching profile:', error);
+        throw error;
+    }
+
+    return data;
+};
+
+export const updateUserProfile = async (profile: Partial<UserProfile>): Promise<void> => {
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) throw new Error('User not authenticated');
+
+    const { error } = await supabase
+        .from('profiles')
+        .update({
+            ...profile,
+            updated_at: new Date().toISOString(),
+        })
+        .eq('id', user.id);
+
+    if (error) {
+        console.error('Error updating profile:', error);
+        throw error;
+    }
 };
